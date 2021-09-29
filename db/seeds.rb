@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+Pet.destroy_all
 
-
-  def cat_url1
+def cat_url1
     url = "https://japancatnetwork.org"
     html = URI.open(url).read
     doc = Nokogiri::HTML(html, nil, "utf-8")
@@ -23,9 +23,12 @@
         cat_html = URI.open("#{url}#{cat_url}").read
         cat_doc = Nokogiri::HTML(cat_html, nil, "utf-8")
         gender = cat_doc.search("td").first.text.strip
-        Pet.create(name: name, animal: animal, gender: gender)
+        pet = Pet.create(name: name, animal: animal, gender: gender)
+        img_link = element.search("a img").attribute("srcset").value.first.strip
+        file1 = URI.open("#{url}#{img_link}")
+        pet.photo.attach(io: file1, filename: "cat.jpeg")
       end
     end
   end
 
-  cat_url1#(keyword)
+cat_url1#(keyword)
