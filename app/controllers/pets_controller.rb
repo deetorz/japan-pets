@@ -8,4 +8,7 @@ class PetsController < ApplicationController
 
   def show
   end
+
+  @all_pets = []
+
 end
