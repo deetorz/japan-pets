@@ -24,7 +24,7 @@
           <p><%= pet.gender %></p>
         <% end %>
         <% if pet.description != nil %>
-          <p><%= pet.description %></p>
+          <p><%= pet.description.first(200) %>...</p>
         <% end %>
         <% if pet.url != nil %>
           <%= link_to pet.url, target:"_blank" do%>
