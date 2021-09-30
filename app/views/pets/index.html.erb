@@ -1,37 +1,38 @@
-<div class="container">
+<div class="container mt-3">
   <h1>Our pets</h1>
-  <p>Find me in app/views/pets/index.html.erb</p>
-  <h3><%= @pets.count %>Pets found </h3>
-  <% @pets.each do |pet| %>
-    <div class="card-product">
-      <% if pet.photo.attached? %>
-        <%= image_tag(pet.photo) %>
-      <% end %>
-      <div class="card-product-infos">
-        <% if pet.name != nil %>
-          <h2><%= pet.name %></h2>
+  <h3><%= @pets.count %> pets found </h3>
+  <div class="container__pets">
+    <% @pets.each do |pet| %>
+      <div class="card-product">
+        <% if pet.photo.attached? %>
+          <%= image_tag(pet.photo) %>
         <% end %>
-        <% if pet.animal != nil %>
-          <p><%= pet.animal %></p>
-        <% end %>
-        <% if pet.age != nil %>
-          <p><%= pet.age %></p>
-        <% end %>
-        <% if pet.breed != nil %>
-          <p><%= pet.breed %></p>
-        <% end %>
-        <% if pet.gender != nil %>
-          <p><%= pet.gender %></p>
-        <% end %>
-        <% if pet.description != nil %>
-          <p><%= pet.description.first(200) %>...</p>
-        <% end %>
-        <% if pet.url != nil %>
-          <%= link_to pet.url, target:"_blank" do%>
-            <small><i class="fas fa-external-link-square-alt icon align-item-center"></i></small>
+        <div class="card-product-infos">
+          <% if pet.name != nil %>
+            <h2><%= pet.name %>, <%= pet.age if pet.age != nil %></h2>
           <% end %>
-        <% end %>
+          <% if pet.animal != nil && pet.gender !=nil %>
+            <p><%= pet.animal.capitalize %> | <%= pet.gender %></p>
+          <% end %>
+          <% if pet.age != nil %>
+            <p><%= pet.age %></p>
+          <% end %>
+          <% if pet.breed != nil %>
+            <p><%= pet.breed %></p>
+          <% end %>
+          <% if pet.gender != nil %>
+            <p><%= pet.gender %></p>
+          <% end %>
+          <% if pet.description != nil %>
+            <p><%= pet.description.first(200) %>...</p>
+          <% end %>
+          <% if pet.url != nil %>
+            <%= link_to pet.url, target:"_blank" do%>
+              <small><i class="fas fa-external-link-square-alt icon align-item-center"></i></small>
+            <% end %>
+          <% end %>
+        </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
