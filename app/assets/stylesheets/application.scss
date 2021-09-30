@@ -13,16 +13,24 @@
 @import "pages/index";
 
 body {
-  background-color: #E6D5B8;
+  background-color: $beige;
+  color: $brown;
 }
 h1 {
-  color: #4A3933;
   font-family: $h1-font;
   font-size: 5rem;
 }
 p,h2,h3,h4,h5,h6 {
   font-family: $p-font;
 }
-p {
-  font-size: 1.5rem;
+h2 {
+  font-size: 1rem;
+}
+a {
+  text-decoration: none;
+  color: #ff8a60;
+  &:hover {
+    text-decoration: none;
+    color: $orange;
+  }
 }
