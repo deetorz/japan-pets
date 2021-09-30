@@ -9,7 +9,61 @@
 @all_pets = []
 Pet.destroy_all
 
-def cat_url1
+def dog1
+  url = "http://chibawan.net/dogdetailscat/dog"
+  html = URI.open(url).read
+  doc = Nokogiri::HTML(html, nil, "utf-8")
+  doc.search(".list dl").each do |element|
+    animal = "dog"
+    dog_url = element.search("h1 a").first.attribute("href").value.strip
+    dog_url = dog_url.gsub(" ", "-") if dog_url.include?(" ")
+    dog_html = URI.open("#{dog_url}").read
+    dog_doc = Nokogiri::HTML(dog_html, nil, "utf-8")
+    name = dog_doc.search('.dogdetails h1').first.text.strip
+    breed = dog_doc.search("tbody td")[0].text.strip
+    gender = dog_doc.search("tbody td")[1].text.strip
+    age = dog_doc.search("tbody td")[2].text.strip
+    description = []
+      dog_doc.search(".data_area_txt p").each do |p|
+        description << p.text.strip
+      end
+    pet = Pet.create(name: name, animal: animal, age: age, breed: breed, gender: gender, url: dog_url, description: description.join)
+    @all_pets << pet
+    img_link = element.search("dt img").attribute("src").value.strip
+    file1 = URI.open("#{img_link}")
+    pet.photo.attach(io: file1, filename: "dog#{@all_pets.index(@all_pets.last)}.jpeg", content_type: 'image/jpeg')
+  end
+  puts "dog1 seeded"
+end
+
+def dog2
+  url = "http://chibawan.net/dogdetailscat/dog/page/2"
+  html = URI.open(url).read
+  doc = Nokogiri::HTML(html, nil, "utf-8")
+  doc.search(".list dl").each do |element|
+    animal = "dog"
+    dog_url = element.search("h1 a").first.attribute("href").value.strip
+    dog_url = dog_url.gsub(" ", "-") if dog_url.include?(" ")
+    dog_html = URI.open("#{dog_url}").read
+    dog_doc = Nokogiri::HTML(dog_html, nil, "utf-8")
+    name = dog_doc.search('.dogdetails h1').first.text.strip
+    breed = dog_doc.search("tbody td")[0].text.strip
+    gender = dog_doc.search("tbody td")[1].text.strip
+    age = dog_doc.search("tbody td")[2].text.strip
+    description = []
+    dog_doc.search(".data_area_txt p").each do |p|
+      description << p.text.strip
+    end
+    pet = Pet.create(name: name, animal: animal, age: age, breed: breed, gender: gender, url: dog_url, description: description.join)
+    @all_pets << pet
+    img_link = element.search("dt img").attribute("src").value.strip
+    file1 = URI.open("#{img_link}")
+    pet.photo.attach(io: file1, filename: "dog#{@all_pets.index(@all_pets.last)}.jpeg", content_type: 'image/jpeg')
+  end
+  puts "dog2 seeded"
+end
+
+def cat0
   url = "https://japancatnetwork.org"
   html = URI.open(url).read
   doc = Nokogiri::HTML(html, nil, "utf-8")
@@ -33,33 +87,65 @@ def cat_url1
       end
     end
   end
+  puts "cat0 seeded"
 end
 
-def pet1
-    url = "http://chibawan.net/dogdetailscat/dog"
+def cat1
+  url = "https://chibawan.net/catdetailscat/cat"
   html = URI.open(url).read
   doc = Nokogiri::HTML(html, nil, "utf-8")
   doc.search(".list dl").each do |element|
-    animal = "dog"
-    dog_url = element.search("h1 a").first.attribute("href").value.strip
-    dog_url = dog_url.gsub(" ", "-") if dog_url.include?(" ")
-    dog_html = URI.open("#{dog_url}").read
-    dog_doc = Nokogiri::HTML(dog_html, nil, "utf-8")
-    name = dog_doc.search('.dogdetails h1').first.text.strip
-    breed = dog_doc.search("tbody td")[0].text.strip
-    gender = dog_doc.search("tbody td")[1].text.strip
-    age = dog_doc.search("tbody td")[2].text.strip
+    animal = "cat"
+    cat_url = element.search("h1 a").first.attribute("href").value.strip
+    cat_url = cat_url.gsub(" ", "-") if cat_url.include?(" ")
+    cat_html = URI.open("#{cat_url}").read
+    cat_doc = Nokogiri::HTML(cat_html, nil, "utf-8")
+    name = cat_doc.search('.catdetails h1').first.text.strip
+    breed = cat_doc.search("tbody td")[0].text.strip
+    gender = cat_doc.search("tbody td")[1].text.strip
+    age = cat_doc.search("tbody td")[2].text.strip
     description = []
-      dog_doc.search(".data_area_txt p").each do |p|
-        description << p.text.strip
-      end
-    pet = Pet.create(name: name, animal: animal, age: age, breed: breed, gender: gender, url: dog_url, description: description.join)
+    cat_doc.search(".data_area_txt p").each do |p|
+      description << p.text.strip
+    end
+    pet = Pet.create(name: name, animal: animal, age: age, breed: breed, gender: gender, url: cat_url, description: description.join)
     @all_pets << pet
     img_link = element.search("dt img").attribute("src").value.strip
     file1 = URI.open("#{img_link}")
-    pet.photo.attach(io: file1, filename: "dog#{@all_pets.index(@all_pets.last)}.jpeg", content_type: 'image/jpeg')
+    pet.photo.attach(io: file1, filename: "cat#{@all_pets.index(@all_pets.last)}.jpeg", content_type: 'image/jpeg')
   end
+  puts "cat1 seeded"
 end
 
-cat_url1#(keyword)
-pet1
+def cat2
+  url = "https://chibawan.net/catdetailscat/cat/page/2"
+  html = URI.open(url).read
+  doc = Nokogiri::HTML(html, nil, "utf-8")
+  doc.search(".list dl").each do |element|
+    animal = "cat"
+    cat_url = element.search("h1 a").first.attribute("href").value.strip
+    cat_url = cat_url.gsub(" ", "-") if cat_url.include?(" ")
+    cat_html = URI.open("#{cat_url}").read
+    cat_doc = Nokogiri::HTML(cat_html, nil, "utf-8")
+    name = cat_doc.search('.catdetails h1').first.text.strip
+    breed = cat_doc.search("tbody td")[0].text.strip
+    gender = cat_doc.search("tbody td")[1].text.strip
+    age = cat_doc.search("tbody td")[2].text.strip
+    description = []
+    cat_doc.search(".data_area_txt p").each do |p|
+      description << p.text.strip
+    end
+    pet = Pet.create(name: name, animal: animal, age: age, breed: breed, gender: gender, url: cat_url, description: description.join)
+    @all_pets << pet
+    img_link = element.search("dt img").attribute("src").value.strip
+    file1 = URI.open("#{img_link}")
+    pet.photo.attach(io: file1, filename: "cat#{@all_pets.index(@all_pets.last)}.jpeg", content_type: 'image/jpeg')
+  end
+  puts "cat2 seeded"
+end
+
+dog1
+dog2
+cat0
+cat1
+cat2
