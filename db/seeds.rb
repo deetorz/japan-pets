@@ -24,7 +24,7 @@ def cat_url1
       cat_doc = Nokogiri::HTML(cat_html, nil, "utf-8")
       gender = cat_doc.search("td").first.text.strip
       description = cat_doc.search("tr")[3].search("td p").first.text.strip
-      pet = Pet.create(name: name, animal: animal, gender: gender, url: cat_url, description: description)
+      pet = Pet.create(name: name, animal: animal, gender: gender, url: "https://japancatnetwork.org#{cat_url}", description: description)
       @all_pets << pet
       unless cat_doc.search("#petGallery a").first.nil?
         img_link = cat_doc.search("#petGallery a").first.attribute("href").value.strip
@@ -36,7 +36,7 @@ def cat_url1
 end
 
 def pet1
-  url = "http://chibawan.net/dogdetailscat/dog"
+    url = "http://chibawan.net/dogdetailscat/dog"
   html = URI.open(url).read
   doc = Nokogiri::HTML(html, nil, "utf-8")
   doc.search(".list dl").each do |element|
@@ -49,8 +49,11 @@ def pet1
     breed = dog_doc.search("tbody td")[0].text.strip
     gender = dog_doc.search("tbody td")[1].text.strip
     age = dog_doc.search("tbody td")[2].text.strip
-    description = dog_doc.search("data_text_area p").text.strip
-    pet = Pet.create(name: name, animal: animal, age: age, breed: breed, gender: gender, url: dog_url, description: description)
+    description = []
+      dog_doc.search(".data_area_txt p").each do |p|
+        description << p.text.strip
+      end
+    pet = Pet.create(name: name, animal: animal, age: age, breed: breed, gender: gender, url: dog_url, description: description.join)
     @all_pets << pet
     img_link = element.search("dt img").attribute("src").value.strip
     file1 = URI.open("#{img_link}")
