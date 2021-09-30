@@ -1,4 +1,4 @@
-.card-product {
+.pet-container {
   overflow: hidden;
   height: 320px;
   width: 80%;
@@ -12,26 +12,26 @@
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
 }
 
-.card-product img {
+.pet-container img {
   height: 100%;
   width: 240px;
   object-fit: cover;
 }
 
-.card-product h2 {
-  font-size: 16px;
+.pet-container h2 {
+  font-size: 2rem;
   font-weight: bold;
   margin: 0;
 }
 
-.card-product p {
-  font-size: 14px;
+.pet-container p {
+  font-size: 1.5rem;
   line-height: 1.2;
   opacity: .7;
   margin-bottom: 0;
   margin-top: 8px;
 }
 
-.card-product .card-product-infos {
+.pet-container .pet-container-infos {
   padding: 16px;
 }

@@ -9,6 +9,7 @@ class PetsController < ApplicationController
 
   def show
   end
+
 @all_pets =[]
 
   url = "http://www.arkbark.net/en/adopt/catsosaka/"
