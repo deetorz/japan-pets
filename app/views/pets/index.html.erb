@@ -1,15 +1,36 @@
 <div class="container">
   <h1>Pets#index</h1>
   <p>Find me in app/views/pets/index.html.erb</p>
+  <h3><%= @pets.count %>Pets found </h3>
   <% @pets.each do |pet| %>
     <div class="card-product">
       <% if pet.photo.attached? %>
-        <%= image_tag(pet.photo, style: "width: 100px;") %>
+        <%= image_tag(pet.photo) %>
       <% end %>
       <div class="card-product-infos">
-        <h2><%= pet.name %></h2>
-        <p><%= pet.animal %></p>
-        <p><%= pet.description %></p>
+        <% if pet.name != nil %>
+          <h2><%= pet.name %></h2>
+        <% end %>
+        <% if pet.animal != nil %>
+          <p><%= pet.animal %></p>
+        <% end %>
+        <% if pet.age != nil %>
+          <p><%= pet.age %></p>
+        <% end %>
+        <% if pet.breed != nil %>
+          <p><%= pet.breed %></p>
+        <% end %>
+        <% if pet.gender != nil %>
+          <p><%= pet.gender %></p>
+        <% end %>
+        <% if pet.description != nil %>
+          <p><%= pet.description %></p>
+        <% end %>
+        <% if pet.url != nil %>
+          <%= link_to pet.url, target:"_blank" do%>
+            <small><i class="fas fa-external-link-square-alt icon align-item-center"></i></small>
+          <% end %>
+        <% end %>
       </div>
     </div>
   <% end %>
