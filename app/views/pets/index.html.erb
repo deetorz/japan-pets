@@ -1,7 +1,7 @@
 <div class="container">
-  <h1>Our pets</h1>
-  <p>Find me in app/views/pets/index.html.erb</p>
-  <h3><%= @pets.count %>Pets found </h3>
+  <h1>Japan Pets</h1>
+  <h3>Adopting a pet is a wonderful thing. But if you live in Japan and don't speak Japanese well enough, it can be difficult finding the right pet for you. Japan Pets aims to fix that. We've scoured the web and found as many pets available for adoption in Japan and put them all on our site. We don't take care of the pets. We only compile a list of them. For more information, please click on the link and you'll be redirected to the site hosting the pet. Japan Pets was created by and is maintained by volunteers.</h3>
+  <h3><%= @pets.count %> Pets Found </h3>
   <% @pets.each do |pet| %>
     <div class="card-product">
       <% if pet.photo.attached? %>
