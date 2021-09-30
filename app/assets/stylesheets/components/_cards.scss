@@ -1,10 +1,11 @@
+
 .container__pets {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.card-product {
+.pet-container {
   overflow: hidden;
   height: 320px;
   width: 45%;
@@ -18,35 +19,38 @@
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
 }
 
-.card-product img {
+.pet-container img {
   height: 100%;
   width: 240px;
   object-fit: cover;
 }
 
-.card-product h2 {
-  font-size: 16px;
+.pet-container h2 {
+  font-size: 2rem;
   font-weight: bold;
   margin: 0;
 }
 
-.card-product p {
-  font-size: 14px;
+.pet-container p {
+  font-size: 1rem;
   line-height: 1.2;
   opacity: .7;
   margin-bottom: 0;
   margin-top: 8px;
 }
 
-.card-product .card-product-infos {
-  padding: 2rem;
+.pet-container .pet-container-infos {
+  padding: 1rem 1.5rem;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 // Media Queries
 
 @media screen and (max-width: 1200px) {
-  .card-product {
+  .pet-container {
     height: max-content;
     flex-direction: column;
 
@@ -57,14 +61,22 @@
   }
 }
 
-@media screen and (max-width: 800px) {
-  .card-product {
-    height: max-content;
-    flex-direction: column;
+@media screen and (max-width: 990px) {
+  .pet-container {
+    height: 510px;
+  }
+}
 
-    img {
-      width: 100%;
-      height: 15rem;
-    }
+@media screen and (max-width: 767px) {
+  .pet-container {
+    width: 80%;
+    height: max-content;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  .pet-container {
+    height: max-content;
+    width: 100%;
   }
 }
