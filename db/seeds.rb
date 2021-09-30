@@ -19,11 +19,12 @@ def cat_url1
       name = element.search('h3 a').first.text.strip
       animal = "cat"
       cat_url = element.search("h3 a").first.attribute("href").value.strip
-      cat_url = cat_url.gsub(" ", "%20+%20") if cat_url.include?(" ")
+      cat_url = cat_url.gsub(" ", "%20") if cat_url.include?(" ")
       cat_html = URI.open("#{url}#{cat_url}").read
       cat_doc = Nokogiri::HTML(cat_html, nil, "utf-8")
       gender = cat_doc.search("td").first.text.strip
-      pet = Pet.create(name: name, animal: animal, gender: gender, url: (url + cat_url))
+      description = cat_doc.search("tr")[3].search("td p").first.text.strip
+      pet = Pet.create(name: name, animal: animal, gender: gender, url: cat_url, description: description)
       @all_pets << pet
       unless cat_doc.search("#petGallery a").first.nil?
         img_link = cat_doc.search("#petGallery a").first.attribute("href").value.strip
@@ -45,10 +46,11 @@ def pet1
     dog_html = URI.open("#{dog_url}").read
     dog_doc = Nokogiri::HTML(dog_html, nil, "utf-8")
     name = dog_doc.search('.dogdetails h1').first.text.strip
-    gender = dog_doc.search("tbody td")[0].text.strip
-    breed = dog_doc.search("tbody td")[1].text.strip
+    breed = dog_doc.search("tbody td")[0].text.strip
+    gender = dog_doc.search("tbody td")[1].text.strip
     age = dog_doc.search("tbody td")[2].text.strip
-    pet = Pet.create(name: name, animal: animal, age: age, breed: breed, gender: gender, url: (url + dog_url))
+    description = dog_doc.search("data_text_area p").text.strip
+    pet = Pet.create(name: name, animal: animal, age: age, breed: breed, gender: gender, url: dog_url, description: description)
     @all_pets << pet
     img_link = element.search("dt img").attribute("src").value.strip
     file1 = URI.open("#{img_link}")
