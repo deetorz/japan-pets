@@ -1,8 +1,50 @@
 <div class="container">
   <h1>Japan Pets</h1>
   <div class="d-flex my-4">
-    <%= render 'search' %>
-    <h3 class="mx-3">Adopting a pet is a wonderful thing. But if you live in Japan and don't speak Japanese well enough, it can be difficult finding the right pet for you on the various websites available. Japan Pets aims to fix that. We've scoured the web and found as many pets available for adoption in Japan and put them all on our site. We don't take care of the pets. We only compile a list of them. For more information, please click on the link and you'll be redirected to the site hosting the pet. Japan Pets was created by and is maintained by volunteers.</h3>
+    <%# <%= render 'search' %> %>
+    <%# <h3 class="mx-3">Adopting a pet is a wonderful thing. But if you live in Japan and don't speak Japanese well enough, it can be difficult finding the right pet for you on the various websites available. Japan Pets aims to fix that. We've scoured the web and found as many pets available for adoption in Japan and put them all on our site. We don't take care of the pets. We only compile a list of them. For more information, please click on the link and you'll be redirected to the site hosting the pet. Japan Pets was created by and is maintained by volunteers.</h3> %>
+  <h3 class="my-3">Adopting a pet is a wonderful thing. But if you live in Japan and don't speak Japanese well enough, it can be difficult finding the right pet for you on the various websites available. Japan Pets aims to fix that. We've scoured the web and found as many pets available for adoption in Japan and put them all on our site. We don't take care of the pets. We only compile a list of them. For more information, please click on the link and you'll be redirected to the site hosting the pet. Japan Pets was created by and is maintained by volunteers.</h3>
+  <h3 class="my-3"><%= @pets.count %> Pets Found </h3>
+  <div class="container__pets">
+    <% @pets.each do |pet| %>
+      <div class="pet-container">
+        <% if pet.photo.attached? %>
+          <%= image_tag(pet.photo) %>
+        <% end %>
+        <div class="pet-container-infos">
+          <% if pet.name != nil %>
+            <% if pet.name.length > 1 %>
+              <h3><%= pet.name.split(" ").first %></h3>
+            <% else %>
+              <h2><%= pet.name %></h2>
+            <% end %>
+          <% end %>
+          <% if pet.animal != nil && pet.gender.present?%>
+            <p><%= pet.animal.capitalize %> | <%= pet.gender.capitalize %></p>
+          <% else %>
+            <p><%= pet.animal.capitalize %></p>
+          <% end %>
+          <% if pet.age != nil %>
+            <p><%= pet.age %></p>
+          <% end %>
+          <% if pet.breed != nil %>
+            <p><%= pet.breed %></p>
+          <% end %>
+          <% if pet.description != nil && pet.description.length > 5 %>
+            <% if pet.description.include?("a" || "the" || "an") %>
+              <p><%= pet.description.first(200) %>...</p>
+            <% else %>
+              <p><%= pet.description.first(50) %>...</p>
+            <% end %>
+          <% end %>
+          <% if pet.url.present? %>
+            <%= link_to pet.url, target:"_blank" do %>
+              <p>Click here for more info</p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
   <%# <h3 class="my-3"> Pets Found </h3> %>
   <%= render 'pet-list' %>

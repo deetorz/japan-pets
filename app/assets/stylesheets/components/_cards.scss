@@ -7,16 +7,14 @@
 
 .pet-container {
   overflow: hidden;
-  height: 320px;
+  height: 20rem;
   width: 45%;
   background: white;
-  box-shadow: 0 0 15px rgba(83, 38, 38, 0.2);
   display: flex;
   align-items: center;
   margin: 1rem;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
 .toggle-card {
@@ -25,7 +23,7 @@
 
 .pet-container img {
   height: 100%;
-  width: 240px;
+  width: 15rem;
   object-fit: cover;
 }
 
@@ -40,7 +38,7 @@
   line-height: 1.2;
   opacity: .7;
   margin-bottom: 0;
-  margin-top: 8px;
+  margin-top: 0.5rem;
 }
 
 .pet-container .pet-container-infos {
@@ -67,7 +65,7 @@
 
 @media screen and (max-width: 990px) {
   .pet-container {
-    height: 510px;
+    height: 31.875rem;
   }
 }
 
