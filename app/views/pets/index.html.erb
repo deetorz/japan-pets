@@ -10,7 +10,11 @@
         <% end %>
         <div class="pet-container-infos">
           <% if pet.name != nil %>
-            <h2><%= pet.name %></h2>
+            <% if pet.name.length > 1 %>
+              <h3><%= pet.name.split(" ").first %></h3>
+            <% else %>
+              <h2><%= pet.name %></h2>
+            <% end %>
           <% end %>
           <% if pet.animal != nil && pet.gender.present?%>
             <p><%= pet.animal.capitalize %> | <%= pet.gender.capitalize %></p>
@@ -23,8 +27,12 @@
           <% if pet.breed != nil %>
             <p><%= pet.breed %></p>
           <% end %>
-          <% if pet.description != nil %>
-            <p><%= pet.description.first(200) %>...</p>
+          <% if pet.description != nil && pet.description.length > 5 %>
+            <% if pet.description.include?("a" || "the" || "an") %>
+              <p><%= pet.description.first(200) %>...</p>
+            <% else %>
+              <p><%= pet.description.first(50) %>...</p>
+            <% end %>
           <% end %>
           <% if pet.url.present? %>
             <%= link_to pet.url, target:"_blank" do %>
