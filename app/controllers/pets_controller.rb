@@ -1,12 +1,10 @@
 class PetsController < ApplicationController
   def index
-    @pets = Pet.all
+    @pagy, @pets = pagy(Pet.all.order(created_at: :desc))
   end
 
   def show
   end
 
   @all_pets = []
-
-
 end
