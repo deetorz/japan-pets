@@ -176,6 +176,35 @@ end
 puts "Dogs added"
 end
 
+def dog6
+  puts "Adding dogs..."
+  url = "http://www.wanwan.org/06social/shipponet.html"
+  html = URI.open(url).read
+  doc = Nokogiri::HTML(html, nil, "utf-8")
+  # doc.search("table tr").each_with_index do |row, index|
+  (0..70).each do |index|
+    if index % 3 == 0
+      (0..3).each do |i|
+        if doc.search("table tr")[index].search("td")[i] != nil
+        name = doc.search("table tr")[index + 1].search("td")[i].text.strip
+        location = doc.search("table tr")[index + 2].nil? ? '' : doc.search("table tr")[index + 2].search("td")[i].text.strip
+        end
+        animal = "dog"
+        pet = Pet.create(name: name, animal: animal, url: url, location: location)
+        @all_pets << pet
+        if doc.search("table tr")[index].search("img")[i] != nil
+          img_link = doc.search("table tr")[index].search("img")[i].attribute("src").value.strip
+          file1 = URI.open("http://www.wanwan.org/06social/#{img_link}")
+          pet.photo.attach(io: file1, filename: "dog#{@all_pets.index(@all_pets.last)}.jpeg", content_type: 'image/jpeg')
+        end
+        if pet.photo.attached? == false
+          pet.destroy
+        end
+      end
+    end
+  end
+  puts "Dogs added"
+end
 
 # CATTSSSSSS
 
@@ -339,6 +368,10 @@ puts "Adding cats..."
   puts "Cats added"
 end
 
+
+
+
+
 def others1
   puts "Adding rabbits..."
   url = "http://www.arkbark.net/en/adopt/othersosaka/"
@@ -412,6 +445,7 @@ dog2
 dog3
 dog4
 dog5
+dog6
 cat1
 cat2
 cat3
