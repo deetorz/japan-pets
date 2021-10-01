@@ -20,7 +20,7 @@
 
 # Other Variables
 # See https://ddnexus.github.io/pagy/api/pagy#other-variables
-# Pagy::VARS[:size]       = [1,4,4,1]                       # default
+Pagy::VARS[:size]       = [1,2,2,1]                       # default
 # Pagy::VARS[:page_param] = :page                           # default
 # Pagy::VARS[:params]     = {}                              # default
 # Pagy::VARS[:fragment]   = '#fragment'                     # example
@@ -65,7 +65,7 @@
 
 # Bootstrap extra: Add nav, nav_js and combo_nav_js helpers and templates for Bootstrap pagination
 # See https://ddnexus.github.io/pagy/extras/bootstrap
-# require 'pagy/extras/bootstrap'
+require 'pagy/extras/bootstrap'
 
 # Bulma extra: Add nav, nav_js and combo_nav_js helpers and templates for Bulma pagination
 # See https://ddnexus.github.io/pagy/extras/bulma
@@ -111,16 +111,16 @@
 
 # Items extra: Allow the client to request a custom number of items per page with an optional selector UI
 # See https://ddnexus.github.io/pagy/extras/items
-# require 'pagy/extras/items'
-# Pagy::VARS[:items_param] = :items    # default
-# Pagy::VARS[:max_items]   = 100       # default
+require 'pagy/extras/items'
+Pagy::VARS[:items_param] = :items    # default
+Pagy::VARS[:max_items]   = 100       # default
 # set to false if you want to make :enable_items_extra an opt-in variable
 # Pagy::VARS[:enable_items_extra] = false    # default true
 
 # Overflow extra: Allow for easy handling of overflowing pages
 # See https://ddnexus.github.io/pagy/extras/overflow
-# require 'pagy/extras/overflow'
-# Pagy::VARS[:overflow] = :empty_page    # default  (other options: :last_page and :exception)
+require 'pagy/extras/overflow'
+Pagy::VARS[:overflow] = :last_page    # default  (other options: :empty_page, :last_page and :exception)
 
 # Metadata extra: Provides the pagination metadata to Javascript frameworks like Vue.js, react.js, etc.
 # See https://ddnexus.github.io/pagy/extras/metadata
