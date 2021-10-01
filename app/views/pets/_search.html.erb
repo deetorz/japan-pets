@@ -1,0 +1,18 @@
+<% animals = [] %>
+<% Pet.all.each do |pet| %>
+  <% animals << pet.animal.capitalize unless animals.include?(pet.animal.capitalize) %>
+<%  end %>
+<div class="search-box">
+  <h4>Search by location and/or animal</h4>
+  <%# removing location for now, maybe we can add it later %>
+  <%# <label>Location</label>
+  <input class="search-box-inputs" type="text" id="location" placeholder="Ex: Tokyo" /> %>
+  <label>Animal</label>
+  <select class="search-box-inputs" id="animal">
+    <option />
+    <% animals.each do |animal| %>
+      <option><%= "#{animal}" %></option>
+    <% end %>
+  </select>
+  <button class="submit">Submit</button>
+</div>
