@@ -206,6 +206,62 @@ def dog6
   puts "Dogs added"
 end
 
+def dog7
+  puts "Adding dogs..."
+  url = "https://www.zaidan-fukuoka-douai.or.jp/personal-animals/hogo/dog"
+  sub_url = "https://www.zaidan-fukuoka-douai.or.jp"
+  html = URI.open(url).read
+  doc = Nokogiri::HTML(html, nil, "utf-8")
+
+  doc.search(".animals-list ul li").each do |element|
+    dog_url = element.search("a").first.attribute("href").value.strip
+    dog_url = dog_url.gsub(" ", "%20") if dog_url.include?(" ")
+    dog_html = URI.open("#{sub_url}#{dog_url}").read
+    dog_doc = Nokogiri::HTML(dog_html, nil, "utf-8")
+
+    name = dog_doc.search('.animals-type').first.text.strip
+    animal = "dog"
+    description = dog_doc.search("tbody tr")[1].search('td').nil? ? "" : dog_doc.search("tbody tr")[1].search("td").first.text.strip
+    gender = dog_doc.search("tbody tr")[3].search('td').nil? ? 'gender undefined' : dog_doc.search("tbody tr")[3].search('td').text.strip
+    age = dog_doc.search("tbody tr")[5].search('td').nil? ? 'gender undefined' : dog_doc.search("tbody tr")[5].search('td').text.strip
+    pet = Pet.create(name: name, animal: animal, age: age, gender: gender, url: "#{sub_url}#{dog_url}", description: description)
+    @all_pets << pet
+
+    img_link = element.search("figure img").attribute("src").value.strip
+    file1 = URI.open("#{sub_url}#{img_link}")
+    pet.photo.attach(io: file1, filename: "dog#{@all_pets.index(@all_pets.last)}.jpeg", content_type: 'image/jpeg')
+  end
+  puts "Dogs(fukuoka) added"
+end
+
+def dog8
+  puts "Adding dogs..."
+  url = "https://www.zaidan-fukuoka-douai.or.jp/animals/centers/dog"
+  sub_url = "https://www.zaidan-fukuoka-douai.or.jp"
+  html = URI.open(url).read
+  doc = Nokogiri::HTML(html, nil, "utf-8")
+
+  doc.search(".animals-list ul li").each do |element|
+    dog_url = element.search("a").first.attribute("href").value.strip
+    dog_url = dog_url.gsub(" ", "%20") if dog_url.include?(" ")
+    dog_html = URI.open("#{sub_url}#{dog_url}").read
+    dog_doc = Nokogiri::HTML(dog_html, nil, "utf-8")
+
+    name = dog_doc.search('.animals-type').first.text.strip
+    animal = "dog"
+    description = dog_doc.search("tbody tr")[1].search('td').nil? ? "" : dog_doc.search("tbody tr")[1].search("td").first.text.strip
+    gender = dog_doc.search("tbody tr")[3].search('td').nil? ? 'gender undefined' : dog_doc.search("tbody tr")[3].search('td').text.strip
+    age = dog_doc.search("tbody tr")[5].search('td').nil? ? 'gender undefined' : dog_doc.search("tbody tr")[5].search('td').text.strip
+    pet = Pet.create(name: name, animal: animal, age: age, gender: gender, url: "#{sub_url}#{dog_url}", description: description)
+    @all_pets << pet
+
+    img_link = element.search("figure img").attribute("src").value.strip
+    file1 = URI.open("#{sub_url}#{img_link}")
+    pet.photo.attach(io: file1, filename: "dog#{@all_pets.index(@all_pets.last)}.jpeg", content_type: 'image/jpeg')
+  end
+  puts "Dogs(fukuoka) added"
+end
+
 # CATTSSSSSS
 
 
@@ -223,7 +279,7 @@ def cat1
       cat_url = cat_url.gsub(" ", "%20") if cat_url.include?(" ")
       cat_html = URI.open("#{url}#{cat_url}").read
       cat_doc = Nokogiri::HTML(cat_html, nil, "utf-8")
-      description = cat_doc.search("tr")[3].search("td p").nil? ? cat_doc.search("tr")[3].search("td p").first.text.strip : ''
+      description = cat_doc.search("tr")[3].search("td p").nil? ? '' : cat_doc.search("tr")[3].search("td p").first.text.strip
       gender = cat_doc.search("td").nil? ? 'gender undefined' : cat_doc.search("td").first.text.strip
       pet = Pet.create(name: name, animal: animal, gender: gender, url: "https://japancatnetwork.org#{cat_url}", description: description)
       @all_pets << pet
@@ -368,9 +424,61 @@ puts "Adding cats..."
   puts "Cats added"
 end
 
+def cat6
+  puts "Adding cats..."
+  url = "https://www.zaidan-fukuoka-douai.or.jp/personal-animals/hogo/cat"
+  sub_url = "https://www.zaidan-fukuoka-douai.or.jp"
+  html = URI.open(url).read
+  doc = Nokogiri::HTML(html, nil, "utf-8")
 
+  doc.search(".animals-list ul li").each do |element|
+    cat_url = element.search("a").first.attribute("href").value.strip
+    cat_url = cat_url.gsub(" ", "%20") if cat_url.include?(" ")
+    cat_html = URI.open("#{sub_url}#{cat_url}").read
+    cat_doc = Nokogiri::HTML(cat_html, nil, "utf-8")
 
+    name = cat_doc.search('.animals-type').first.text.strip
+    animal = "cat"
+    description = cat_doc.search("tbody tr")[1].search('td').nil? ? "" : cat_doc.search("tbody tr")[1].search("td").first.text.strip
+    gender = cat_doc.search("tbody tr")[3].search('td').nil? ? 'gender undefined' : cat_doc.search("tbody tr")[3].search('td').text.strip
+    age = cat_doc.search("tbody tr")[5].search('td').nil? ? 'gender undefined' : cat_doc.search("tbody tr")[5].search('td').text.strip
+    pet = Pet.create(name: name, animal: animal, age: age, gender: gender, url: "#{sub_url}#{cat_url}", description: description)
+    @all_pets << pet
 
+    img_link = element.search("figure img").attribute("src").value.strip
+    file1 = URI.open("#{sub_url}#{img_link}")
+    pet.photo.attach(io: file1, filename: "cat#{@all_pets.index(@all_pets.last)}.jpeg", content_type: 'image/jpeg')
+  end
+  puts "Cats (fukuoka) added"
+end
+
+def cat7
+  puts "Adding cats..."
+  url = "https://www.zaidan-fukuoka-douai.or.jp/animals/centers/cat"
+  sub_url = "https://www.zaidan-fukuoka-douai.or.jp"
+  html = URI.open(url).read
+  doc = Nokogiri::HTML(html, nil, "utf-8")
+
+  doc.search(".animals-list ul li").each do |element|
+    cat_url = element.search("a").first.attribute("href").value.strip
+    cat_url = cat_url.gsub(" ", "%20") if cat_url.include?(" ")
+    cat_html = URI.open("#{sub_url}#{cat_url}").read
+    cat_doc = Nokogiri::HTML(cat_html, nil, "utf-8")
+
+    name = cat_doc.search('.animals-type').first.text.strip
+    animal = "cat"
+    description = cat_doc.search("tbody tr")[1].search('td').nil? ? "" : cat_doc.search("tbody tr")[1].search("td").first.text.strip
+    gender = cat_doc.search("tbody tr")[3].search('td').nil? ? 'gender undefined' : cat_doc.search("tbody tr")[3].search('td').text.strip
+    age = cat_doc.search("tbody tr")[5].search('td').nil? ? 'gender undefined' : cat_doc.search("tbody tr")[5].search('td').text.strip
+    pet = Pet.create(name: name, animal: animal, age: age, gender: gender, url: "#{sub_url}#{cat_url}", description: description)
+    @all_pets << pet
+
+    img_link = element.search("figure img").attribute("src").value.strip
+    file1 = URI.open("#{sub_url}#{img_link}")
+    pet.photo.attach(io: file1, filename: "cat#{@all_pets.index(@all_pets.last)}.jpeg", content_type: 'image/jpeg')
+  end
+  puts "Cats (fukuoka) added"
+end
 
 def others1
   puts "Adding rabbits..."
@@ -446,11 +554,15 @@ dog3
 dog4
 dog5
 dog6
+dog7
+dog8
 cat1
 cat2
 cat3
 cat4
 cat5
+cat6
+cat7
 others1
 others2
 
