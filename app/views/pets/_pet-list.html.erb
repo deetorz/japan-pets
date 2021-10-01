@@ -9,7 +9,7 @@
           <h2><%= pet.name %></h2>
         <% end %>
         <% if pet.animal != nil && pet.gender.present?%>
-          <p><%= pet.animal.capitalize %> | <%= pet.gender.capitalize %></p>
+          <p class="animal"><%= pet.animal.capitalize %> | <%= pet.gender.capitalize %></p>
         <% else %>
           <p><%= pet.animal.capitalize %></p>
         <% end %>
