@@ -1,0 +1,31 @@
+.pages__pets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-item.active .page-link {
+  background-color: $info !important;
+  border: 1px solid $info !important;
+}
+
+.pagination > li > a
+{
+    color: $gray;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #FFF;
+    background-color: #ce8d00;
+    border-color: #ce8d00;
+}
+
+.pagination > .active > a:hover
+{
+    background-color: #ce8d00 !important;
+    border: solid 1px #ce8d00 !important;
+}
