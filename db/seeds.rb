@@ -58,8 +58,8 @@ def others_seed(url)
   puts "28 other little creatures added"
 end
 
-main_seed("https://www.pet-home.jp/dogs/", "Dog")
-main_seed("https://www.pet-home.jp/dogs/page2/", "Dog")
+# main_seed("https://www.pet-home.jp/dogs/", "Dog")
+# main_seed("https://www.pet-home.jp/dogs/page2/", "Dog")
 # main_seed("https://www.pet-home.jp/dogs/page2/", "Dog")
 # main_seed("https://www.pet-home.jp/dogs/page3/", "Dog")
 # main_seed("https://www.pet-home.jp/dogs/page4/", "Dog")
@@ -75,8 +75,8 @@ main_seed("https://www.pet-home.jp/dogs/page2/", "Dog")
 # main_seed("https://www.pet-home.jp/dogs/page14/", "Dog")
 # main_seed("https://www.pet-home.jp/dogs/page15/", "Dog")
 
-main_seed("https://www.pet-home.jp/cats/", "Cat")
-main_seed("https://www.pet-home.jp/cats/page2/", "Cat")
+# main_seed("https://www.pet-home.jp/cats/", "Cat")
+# main_seed("https://www.pet-home.jp/cats/page2/", "Cat")
 # main_seed("https://www.pet-home.jp/cats/page3/", "Cat")
 # main_seed("https://www.pet-home.jp/cats/page4/", "Cat")
 # main_seed("https://www.pet-home.jp/cats/page5/", "Cat")
@@ -111,8 +111,8 @@ others_seed("https://www.pet-home.jp/small/page2/")
 # others_seed("https://www.pet-home.jp/small/page19/")
 # others_seed("https://www.pet-home.jp/small/page20/")
 
-main_seed("https://www.pet-home.jp/fishs/", "Fish")
-main_seed("https://www.pet-home.jp/fishs/page2/", "Fish")
+# main_seed("https://www.pet-home.jp/fishs/", "Fish")
+# main_seed("https://www.pet-home.jp/fishs/page2/", "Fish")
 # main_seed("https://www.pet-home.jp/fishs/page3/", "Fish")
 # main_seed("https://www.pet-home.jp/fishs/page4/", "Fish")
 # main_seed("https://www.pet-home.jp/fishs/page5/", "Fish")
@@ -132,8 +132,8 @@ main_seed("https://www.pet-home.jp/fishs/page2/", "Fish")
 # main_seed("https://www.pet-home.jp/fishs/page19/", "Fish")
 # main_seed("https://www.pet-home.jp/fishs/page20/", "Fish")
 
-main_seed("https://www.pet-home.jp/birds/", "Birds")
-main_seed("https://www.pet-home.jp/birds/page2/", "Birds")
+# main_seed("https://www.pet-home.jp/birds/", "Birds")
+# main_seed("https://www.pet-home.jp/birds/page2/", "Birds")
 # main_seed("https://www.pet-home.jp/birds/page3/", "Birds")
 # main_seed("https://www.pet-home.jp/birds/page4/", "Birds")
 # main_seed("https://www.pet-home.jp/birds/page5/", "Birds")
@@ -178,11 +178,11 @@ puts "Database seeded... #{Pet.count} pets added!"
 
 puts "Adjusting animal names"
 Pet.all.each do |pet|
-  pet.animal.gsub('Others', '') if pet.animal.include?('others')
-  pet.animal.gsub('Other', '') if pet.animal.include?('other')
-  pet.animal.gsub('(', '') if pet.animal.include?('(')
-  pet.animal.gsub(')', '') if pet.animal.include?(')')
-  pet.animal.strip
+  pet.animal = pet.animal.gsub('Others', '') if pet.animal.include?('Others')
+  pet.animal = pet.animal.gsub('Other', '') if pet.animal.include?('Other')
+  pet.animal = pet.animal.gsub('(', '') if pet.animal.include?('(')
+  pet.animal = pet.animal.gsub(')', '') if pet.animal.include?(')')
+  pet.animal = pet.animal.strip.capitalize
 end
 
 # def dog1
